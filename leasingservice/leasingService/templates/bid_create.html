@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>new Bid</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.server_id.label }}<br>
+            {{ form.server_id(size=32) }}
+        </p>
+        <p>
+            {{ form.quantity.label }}<br>
+            {{ form.quantity(size=3) }}
+        </p>
+        <p>
+            {{ form.wanted_from.label }}<br>
+            {{ form.wanted_from(size=32) }} <!-- should be in date time format -->
+        </p>
+        <p>
+            {{ form.duration.label }}<br>
+            {{ form.duration(size=3) }} <!-- should be in date time format -->
+        </p>
+        <p>
+            {{ form.max_price_quote.label }}<br>
+            {{ form.max_price_quote(size=3) }} <!-- should be in date time format -->
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}

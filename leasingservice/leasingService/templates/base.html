@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	  {% if title %}
+	  <title>{{ page }} -- {{ title }}</title>
+      {% else %}
+      <title>Welcome to FLOCX Leasing Service</title>
+      {% endif %}
+    </head>
+    <body>
+        <div>Home page: <a href="/index">FLOCX Leasing Service</a>
+         <a href="/bid/create">Submit new Bid</a>
+        </div>
+        <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </body>
+</html>

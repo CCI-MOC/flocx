@@ -1,0 +1,36 @@
+Create bids  and offers
+=========================
+Users will submit bids and offers to the service.
+Service will verify the format of the bids and offers.
+Accept bids and offers. Return confirmation message on acceptance.
+
+
+Retrieve bids and offers:
+==========================
+For a given bid offer id, return the details of the bid or offer.
+
+Delete bids and offers:
+========================
+For a given bid or offer id, delete that particular bid or offer.
+
+**** LEASING SERVICE ****
+Create a UI Web Page
+one with offer form and one with bid form and a submit button
+and those will make rest calls to the trading platform.
+
+On Refresh show me all of mine bids and offers
+
+*** MATCHING ENGINE ****
+
+
+
+
+
+call this service the trading platform
+Introduce a database: sqlite with sqlalchemy
+
+
+move code from api.py to dashboard.py
+put all the flask jazz
+
+Do we have more than one openstack cluster in MOC
