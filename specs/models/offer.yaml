@@ -1,0 +1,76 @@
+# See the Swagger/OpenAPI specification: https://swagger.io/specification/
+
+---
+openapi: "3.0.0"
+info:
+  title: "FLOCX Marketplace API (Offers)"
+  version: 1.0.0
+
+paths: {}
+
+components:
+  schemas:
+    ListOfOffers:
+      type: array
+      items:
+        $ref: '#/components/schemas/Offer'
+
+    Offer:
+      properties:
+        id:
+          description: UUID of this offer
+          type: string
+          format: uuid
+        project_id:
+          description: UUID of project making this offer
+          type: string
+          format: uuid
+        type:
+          description: what sort of resource does this offer describe?
+          type: string
+          enum: [ironic_node, dummy_node]
+        start_date:
+          type: string
+          format: date-time
+          example: 20190522T00:00:00Z
+        end_date:
+          type: string
+          format: date-time
+          example: 20190527T00:00:00Z
+        status:
+          type: string
+          enum: [open, claimed, closed, deleted]
+        server:
+          $ref: '#/components/schemas/Server'
+
+    ListOfServers:
+      type: array
+      items:
+        $ref: '#/components/schemas/Server'
+
+    Server:
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: b5597e97-a43e-4f47-bcb9-70b65cbb23dd
+        project_id:
+          description: UUID of project that owns this server
+          type: string
+          format: uuid
+        properties:
+          type: object
+          description: Free-form metadata attributes that describe this server.
+          additionalProperties: true
+          example:
+            memory_mb: 16384
+            cpu_model: "Intel(R) Xeon(R) CPU E3-1246 v3 @ 3.50GHz"
+            cpu_arch: x86_64
+            cpu_physical_count: 1
+            cpu_core_count: 8
+            cpu_speed_ghz: 3.90
+            disks:
+              - size_gb: 500
+                model: YOYODYNE 1234
+              - size_gb: 500
+                model: Serius Cybernetics 4242

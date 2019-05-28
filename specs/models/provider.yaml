@@ -1,0 +1,39 @@
+# See the Swagger/OpenAPI specification: https://swagger.io/specification/
+
+---
+openapi: "3.0.0"
+info:
+  title: "FLOCX Marketplace API (Providers)"
+  version: 1.0.0
+
+paths: {}
+
+components:
+
+  schemas:
+
+    Provider:
+      required:
+        - id
+        - endpoint_url
+      properties:
+        endpoint_url:
+          type: string
+        id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      example:
+        id: "f5826b8e-f2aa-4222-9d95-7ed9d05d3f28"
+        endpoint_url: "http://provider0.example.com"
+        created_at: "20190529T00:00:00Z"
+        updated_at: "20190529T00:00:00Z"
+
+    ListOfProviders:
+      type: array
+      items:
+        $ref: '#/components/schemas/Provider'

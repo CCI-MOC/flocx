@@ -1,0 +1,46 @@
+# See the Swagger/OpenAPI specification: https://swagger.io/specification/
+
+---
+openapi: "3.0.0"
+info:
+  title: "FLOCX Marketplace API (Contracts)"
+  version: 1.0.0
+
+paths: {}
+
+components:
+
+  schemas:
+
+    ListOfContracts:
+      type: array
+      items:
+        $ref: '#/components/schemas/Contract'
+
+    Contract:
+      properties:
+        id:
+          description: UUID of this contract
+          type: string
+          format: uuid
+          example: 0e6c010a-d1e8-4da0-bc1d-88d457b04516
+        bid_id:
+          description: UUID of bid associated with this contract
+          type: string
+          format: uuid
+          example: 7c2704b3-78b0-4443-b5e7-d05722f6d0c1
+        offer_id:
+          description: UUID of offer associated with this contract
+          type: string
+          format: uuid
+          example: 50582bfa-3de5-4eac-a627-f18b5f8a77fe
+        start_date:
+          type: string
+          format: date-time
+          example: 20190522T00:00:00Z
+        end_date:
+          type: string
+          format: date-time
+          example: 20190527T00:00:00Z
+        status:
+          type: string

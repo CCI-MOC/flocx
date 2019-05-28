@@ -1,0 +1,285 @@
+# See the Swagger/OpenAPI specification: https://swagger.io/specification/
+
+---
+openapi: "3.0.0"
+info:
+  title: "FLOCX Marketplace API"
+  version: 1.0.0
+servers:
+  - url: http://marketplace.example.com/{version}
+    description: example endpoint
+    variables:
+      version:
+        enum:
+          - v1
+        default: v1
+
+# The paths section provides details about the endpoints
+# supported by the API.
+paths:
+
+#  ____                 _     _           
+# |  _ \ _ __ _____   _(_) __| | ___ _ __ 
+# | |_) | '__/ _ \ \ / / |/ _` |/ _ \ '__|
+# |  __/| | | (_) \ V /| | (_| |  __/ |   
+# |_|   |_|  \___/ \_/ |_|\__,_|\___|_|   
+#                                         
+
+  /provider:
+    get:
+      operationId: listProviders
+      summary: List all registered providers.
+      responses:
+        '200':
+          description: List of all registered providers.
+          content:
+            application/json:
+              schema:
+                # This is a reference to a data model in the
+                # "components" section of this document.
+                $ref: 'models/provider.yaml#/components/schemas/ListOfProviders'
+    post:
+      operationId: createProvider
+      summary: Register a new provider with the Marketplace.
+      requestBody:
+        description: Provider to add to the system.
+        content:
+          application/json:
+            schema:
+              $ref: 'models/provider.yaml#/components/schemas/Provider'
+      responses:
+        '201':
+          description: Provider created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: 'models/provider.yaml#/components/schemas/Provider'
+
+  /provider/{providerId}:
+    get:
+      operationId: getProvider
+      summary: Get information about a single provider.
+      parameters:
+        - in: path
+          name: providerId
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Information about a single provider.
+          content:
+            application/json:
+              schema:
+                $ref: 'models/provider.yaml#/components/schemas/Provider'
+        default:
+          description: Error condition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status: error
+                message: Provider does not exist. 
+
+    put:
+      operationId: updateProvider
+      summary: Update provider information
+      parameters:
+        - in: path
+          name: providerId
+          schema:
+            type: string
+          required: true
+      requestBody:
+        description: Updates for this provider
+        content:
+          application/json:
+            schema:
+              $ref: 'models/provider.yaml#/components/schemas/Provider'
+      responses:
+        '200':
+          description: Provider was updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: 'models/provider.yaml#/components/schemas/Provider'
+        default:
+          description: Error condition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status: error
+                message: Provider does not exist. 
+
+    delete:
+      operationId: deleteProvider
+      summary: Remove a provider from the Marketplace
+      parameters:
+        - in: path
+          name: providerId
+          schema:
+            type: string
+          required: true
+      responses:
+        '204':
+          description: Provider deleted successfully.
+        default:
+          description: Error condition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status: error
+                message: Provider does not exist. 
+
+#   ___   __  __           
+#  / _ \ / _|/ _| ___ _ __ 
+# | | | | |_| |_ / _ \ '__|
+# | |_| |  _|  _|  __/ |   
+#  \___/|_| |_|  \___|_|   
+#                          
+
+  /offer:
+    get:
+      operationId: listOffers
+      summary: List currently active offers.
+      responses:
+        '200':
+          description: List of offers
+          content:
+            application/json:
+              schema:
+                $ref: 'models/offer.yaml#/components/schemas/ListOfOffers'
+
+    post:
+      operationId: createOffer
+      summary: Create a new offer
+      requestBody:
+        description: Offer details
+        content:
+          application/json:
+            schema:
+              $ref: 'models/offer.yaml#/components/schemas/Offer'
+      responses:
+        '201':
+          description: offer created successfully
+          content:
+            application/json:
+              schema:
+                $ref: 'models/offer.yaml#/components/schemas/Offer'
+
+  /offer/{offerId}:
+    get:
+      operationId: getOffer
+      summary: Get information about a single Offer
+      parameters:
+        - in: path
+          name: offerId
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Offer detail
+          content:
+            application/json:
+              schema:
+                $ref: 'models/offer.yaml#/components/schemas/Offer'
+        default:
+          description: Error condition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status: error
+                message: Offer does not exist. 
+
+#  ____  _     _     
+# | __ )(_) __| |    
+# |  _ \| |/ _` |    
+# | |_) | | (_| |    
+# |____/|_|\__,_|    
+
+  /bid:
+    get:
+      operationId: listBids
+      summary: Get a list of bids
+      responses:
+        '200':
+          description: A list of bids
+          content:
+            application/json:
+              schema:
+                $ref: 'models/bid.yaml#/components/schemas/ListOfBids'
+
+    post:
+      operationId: createBid
+      summary: Create a new bid
+      requestBody:
+        description: Bid details
+        content:
+          application/json:
+            schema:
+              $ref: 'models/bid.yaml#/components/schemas/Bid'
+      responses:
+        '201':
+          description: Bid that was created
+          content:
+            application/json:
+              schema:
+                $ref: 'models/bid.yaml#/components/schemas/Bid'
+
+  /bid/{bidId}:
+    get:
+      operationId: getBid
+      summary: Get information about a specific bid
+      parameters:
+        - in: path
+          name: bidId
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Bid detail
+          content:
+            application/json:
+              schema:
+                $ref: 'models/bid.yaml#/components/schemas/Bid'
+
+#   ____            _                  _   
+#  / ___|___  _ __ | |_ _ __ __ _  ___| |_ 
+# | |   / _ \| '_ \| __| '__/ _` |/ __| __|
+# | |__| (_) | | | | |_| | | (_| | (__| |_ 
+#  \____\___/|_| |_|\__|_|  \__,_|\___|\__|
+#                                          
+
+  /contract:
+    get:
+      operationId: listContracts
+      summary: Get a list of contracts
+      responses:
+        '200':
+          description: A list of contracts
+          content:
+            application/json:
+              schema:
+                $ref: 'models/contract.yaml#/components/schemas/ListOfContracts'
+
+# The components section is a place to describe data models.
+components:
+  schemas:
+    Error:
+      required:
+        - status
+        - message
+      properties:
+        status:
+          type: string
+        message:
+          type: string

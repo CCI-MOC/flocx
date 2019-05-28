@@ -1,0 +1,64 @@
+# See the Swagger/OpenAPI specification: https://swagger.io/specification/
+
+---
+openapi: "3.0.0"
+info:
+  title: "FLOCX Marketplace API (Bids)"
+  version: 1.0.0
+
+paths: {}
+
+components:
+
+  schemas:
+
+    ListOfBids:
+      type: array
+      items:
+        $ref: '#/components/schemas/Bid'
+
+    Bid:
+      properties:
+        id:
+          description: UUID of this bid
+          type: string
+          format: uuid
+          example: e56afd9e-007a-4a87-a722-6f38f6c204e6
+        project_id:
+          description: UUID of project requesting these resources
+          type: string
+          example: ec9a3f72-af40-44d9-a04c-71c7db7e1ad3
+        start_time:
+          description: Request for resources starting at this time
+          type: string
+          format: date-time
+          example: 20190524T00:00:00Z
+        end_time:
+          description: Request for resources ending at this time
+          type: string
+          format: date-time
+          example: 20190523T00:00:00Z
+        requirements:
+          $ref: '#/components/schemas/ListOfRequirements'
+
+    ListOfRequirements:
+      type: array
+      items:
+        $ref: '#/components/schemas/Requirement'
+
+    Requirement:
+      properties:
+        expression:
+          type: string
+        op:
+          type: string
+          enum: ['>', '>=', '<', '<=', '=', '!=',
+                 'eq', 'ne',
+                 'contains', 'startswith',
+                 'endswith', 'matches']
+        value:
+          type: string
+      example:
+        expression: 'memory_mb'
+        op: '>='
+        value: '16192'
