@@ -45,20 +45,12 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Requirement'
+      example:
+        - ['memory_mb', '>=', '16192']
+        - ['cost', '<', '0.50']
 
     Requirement:
-      properties:
-        expression:
-          type: string
-        op:
-          type: string
-          enum: ['>', '>=', '<', '<=', '=', '!=',
-                 'eq', 'ne',
-                 'contains', 'startswith',
-                 'endswith', 'matches']
-        value:
-          type: string
-      example:
-        expression: 'memory_mb'
-        op: '>='
-        value: '16192'
+      type: array
+      items:
+        type: string
+      example: ['memory_mb', '>=', '16192']
