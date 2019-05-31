@@ -29,7 +29,7 @@ A contract represents an agreement by the provider to make a resource available 
 * *offer_uuid*: The offer to which the contract corresponds.
 * *start_date*: The start date of the contract.
 * *end_date*: The end date of the contract.
-* *project_uuid*: The UUID of the OpenStack project to which the resource will be contracted.
+* *project_id*: The ID of the OpenStack project to which the resource will be contracted.
 * *status*: Possible values are *open*, *fulfilled*, and *expired*.
 * *properties*: This defines additional properties relevant to the contract which are not intrinsic to the resource itself. One example is *contract_callback_url*.
 * *created_at*
