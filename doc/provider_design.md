@@ -9,7 +9,7 @@ The FLOCX provider is an OpenStack service that serves as the communication poin
 
 ### offers
 
-An offer represents an agreement by a hardware owner to make their resource available for lease in the marketplace.
+An offer represents an agreement by a hardware owner to make their resource available for lease in the marketplace. Each offer represents a single resource; however, a UI may allow an owner to select multiple resources to offer at once.
 
 * *uuid*
 * *resource_type*: This, combined with *resource_uuid*, defines the offered resource. It will typically be set to *ironic_node*.
@@ -23,7 +23,7 @@ An offer represents an agreement by a hardware owner to make their resource avai
 
 ### contracts
 
-A contract represents an agreement by the provider to make a resource available for use by a specified project.
+A contract represents an agreement by the provider to make a resource available for use by a specified project. Each contract is tied to a single offer, making it easy to understand which contracts are affected if an offer expires prematurely.
 
 * *uuid*
 * *offer_uuid*: The offer to which the contract corresponds.
