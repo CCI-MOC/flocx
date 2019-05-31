@@ -1,13 +1,9 @@
 # FLOCX Provider Design
 
-The FLOCX provider is an OpenStack service that provides two key functions:
+The FLOCX provider is an OpenStack service that serves as the communication point between a single OpenStack instance and the FLOCX marketplace. It provides two primary functions.
 
 * It allows hardware owners to create offers for the FLOCX marketplace.
-* It receives contracts from the FLOCX matcher and is responsible for fulfilling them.
-
-## Architecture
-
-**DIAGRAM TO COME**
+* It receives contracts from the FLOCX marketplace and is responsible for fulfilling them.
 
 ## Data Model
 
