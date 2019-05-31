@@ -16,6 +16,7 @@ An offer represents an agreement by a hardware owner to make their resource avai
 * *resource_uuid*: This, combined with *resource_type*, defines the offered resource.
 * *start_date*: The start date of the offer.
 * *end_date*: The end date of the offer.
+* *project_id*: The ID of the OpenStack project from which this offer originates.
 * *status*: Possible values are *open*, *claimed*, and *expired*.
 * *properties*: This defines additional properties relevant to the offer which are not intrinsic the the resource itself (intrinsic properties are fetched from services like Ironic and passed onwards). One example is *price*.
 * *created_at*
