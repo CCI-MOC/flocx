@@ -20,8 +20,8 @@ An offer represents an agreement by a hardware owner to make their resource avai
 * *resource_uuid*: This, combined with *resource_type*, defines the offered resource.
 * *start_date*: The start date of the offer.
 * *end_date*: The end date of the offer.
-* *status*
-* *properties*: This defines additional properties relevant to the offer which are not intrinsic the the resource itself. One example is *price*.
+* *status*: Possible values are *open*, *claimed*, and *expired*.
+* *properties*: This defines additional properties relevant to the offer which are not intrinsic the the resource itself (intrinsic properties are fetched from services like Ironic and passed onwards). One example is *price*.
 * *created_at*
 * *updated_at*
 
@@ -30,33 +30,18 @@ An offer represents an agreement by a hardware owner to make their resource avai
 A contract represents an agreement by the provider to make a resource available for use by a specified project.
 
 * *uuid*
-* *resource_type*: This, combined with *resource_uuid*, defines the contracted resource. It will typically be set to *ironic_node*.
-* *resource_id*: This, combined with *resource_type*, defines the contracted resource.
+* *offer_uuid*: The offer to which the contract corresponds.
 * *start_date*: The start date of the contract.
 * *end_date*: The end date of the contract.
 * *project_uuid*: The UUID of the OpenStack project to which the resource will be contracted.
-* *status*
+* *status*: Possible values are *open*, *fulfilled*, and *expired*.
 * *properties*: This defines additional properties relevant to the contract which are not intrinsic to the resource itself. One example is *contract_callback_url*.
 * *created_at*
 * *updated_at*
 
 ## REST API
 
-**ADDITIONAL DETAIL TO COME**
-
-### offers
-
-* create
-* update
-* delete
-* get
-
-### contracts
-
-* create
-* update
-* delete
-* get
+**LINK OUT?**
 
 ## Manager
 
