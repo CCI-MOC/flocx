@@ -1,0 +1,28 @@
+{
+  "name": "flocx",
+  "version": "1.0.0",
+  "description": "flocx project documentation",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cci-moc/flocx.git"
+  },
+  "author": "CCI-MOC Project",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/cci-moc/flocx/issues"
+  },
+  "homepage": "https://github.com/cci-moc/flocx#readme",
+  "dependencies": {
+    "remark-cli": "^6.0.1",
+    "remark-preset-lint-markdown-style-guide": "^2.1.3",
+    "remark-preset-lint-recommended": "^3.0.3",
+    "remark-validate-links": "^8.0.3"
+  }
+}
