@@ -11,14 +11,14 @@ organizations.  Using FLOCX, organizations can rent nodes from their co-located
 neighbors in times of high demand and offer their own resources at a suitable
 price when others experience high demand. 
 
+## The Architecture
 
-# The Architecture
 ![flocx](./images/Ironic,%20Provider,%20Marketplace.png)
 
 To enable such a marketplace we will have to create some new services and make
 changes to existing OpenStack services.
 
-## Micro-services that make up FLOCX
+### Micro-services that make up FLOCX
  
 FLOCX consists of the following new micro-services that will be added to
 OpenStack:
@@ -37,7 +37,7 @@ matches are found between offers and bids.
 **[Auction Engine](https://github.com/CCI-MOC/flocx-matcher)**: The matchmaking
 service that maps offers to suitable bids and vice-versa.
 
-## Changes to Existing OpenStack Service
+### Changes to Existing OpenStack Service
 
 **Ironic**: Current release of Ironic (as of summer of 2019) does not support
 multi-tenancy.  We will make necessary changes to Ironic so that it can support
@@ -45,32 +45,36 @@ multi-tenancy.
 
 A multi-tenant Ironic offer following advantages:
 
-* This allows for logically isolating hardware that belongs to different
+- This allows for logically isolating hardware that belongs to different
   groups. 
-* Organizations to put their hardware under the control of a single Ironic
+
+- Organizations to put their hardware under the control of a single Ironic
   deployment while maintaining ownership and control of their servers. 
-* Small hardware owners (single machine owners) do have to setup a whole
+
+- Small hardware owners (single machine owners) do have to setup a whole
   OpenStack to participate in FLOCX.  They can simply join ironic of any
   existing OpenStack deployments and get started.
 
-
-# Minimum Viable Product (MVP)
+## Minimum Viable Product (MVP)
 
 We use agile methodology to develop this system. To begin, we would like to
 keep things simple.  Following are the simplifications that we have assumed in
 our minimum viable product. 
 
-## Assumptions made for MVP
+### Assumptions made for MVP
 
-* There is only one OpenStack deployment managing all hardware from all
+- There is only one OpenStack deployment managing all hardware from all
   organizations.
-* FLOCX-microservices (`provider service` & `marketplace service`) will be
+
+- FLOCX-microservices (`provider service` & `marketplace service`) will be
   services added to the single OpenStack deployment.
-* All servers are of homogeneous configuration.
-* All hardware is managed by Ironic where each organization is assigned a
+
+- All servers are of homogeneous configuration.
+
+- All hardware is managed by Ironic where each organization is assigned a
   project.
 
-## Overview of the workflow of FLOCX MVP
+### Overview of the workflow of FLOCX MVP
 
 ![flocx](./images/FLOCX_workflow_overiew.png)
 
@@ -105,25 +109,23 @@ Please refer to the figure for each steps described below:
 8. Both the offering and the bidding organizations are notified about the newly
    formed contract. 
 
+## GLOSSARY
 
-# GLOSSARY
-
-## Offers 
+### Offers 
 
 Contains data about the server available for rent. Includes information like
 hardware configuration, Beginning and Ending time of availability and price at
 which the server is available for rent.
     
-## Bids
+### Bids
 
 Contains data about the type of machine the bidders wishes to rent. It includes
 information like `start_time` - when the server is needed, `Duration`: how long
 will it be used, `price`: what is the price the bidder is willing to pay. It
 also includes desired hardware configuration if any.  
     
-## Contracts
+### Contracts
 
 Contains data about which offers have matched with particular bid. It also
 states the duration for which the servers will be available on rent and rate at
 which the rent will be charged. 
-
