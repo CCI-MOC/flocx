@@ -1,10 +1,21 @@
 ---
 dist: xenial
-language: python
-python:
-  - 3.7
-install:
-  - pip install -r test-requirements.txt
-script:
-  - ./scripts/validate-all-yaml
-  - ./scripts/validate-openapi-specs
+
+matrix:
+  include:
+    - language: python
+      python:
+        - 3.7
+      install:
+        - pip install -r test-requirements.txt
+      script:
+        - ./scripts/run-test validate-all-yaml
+        - ./scripts/run-test validate-openapi-specs
+
+    - language: node_js
+      node_js:
+        - "10"
+      install:
+        - npm install
+      script:
+        - ./scripts/run-test validate-markdown
