@@ -1,0 +1,492 @@
+---
+openapi: 3.0.0
+
+info:
+  version: '1.0.0'
+  title: 'Provider Service API'
+  description: 'Defines resources and methods that tenants of OpenStack can use for trading servers with the Marketplace'
+
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+
+
+# Added by API Auto Mocking Plugin
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/FLOCX/Provider_Service/1.0.0
+
+tags:
+- name: offer
+  description: Operations about selling servers
+  externalDocs:
+    description: To render copy this file into
+    url: https://editor.swagger.io/
+- name: contract
+  description: Operations about Contracts
+  externalDocs:
+    description: To render copy this file into
+    url: https://editor.swagger.io/
+
+
+paths:
+  /offers:
+    get:
+      tags:
+      - offer
+      operationId: list_offers
+      description: >-
+        Show list of offers from everyone. If admin is making request, show all offers with all statutes.
+        In case of non-admin user show only the offers the user has created.
+      responses:
+        200:
+          description: Lists all offers made by the tenant.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/provider_offer'
+
+    post:
+      tags:
+      - offer
+      operationId: create_offer
+      description: >-
+        Server owners who wish to offer their servers for rent in the marketplace fill out the required details
+        described below to create an offer and submit it to provider service
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/project_offer'
+      responses:
+        '201':
+          description: Offer submitted to provider service successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/provider_offer'
+        '400':
+          description: Invalid input data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 'Error'
+                message: >-
+                  Invalid or insufficient input parameters. Cannot create
+                  offer.
+
+  /offer/<offer_id>:
+    get:
+      tags:
+        - offer
+      operationId: offer_show(offer_id)
+      description: >-
+        Obtain details of a particular offer. Admin user is allowed to fetch info about any offer.
+        Non admin user is allowed to fetch info about only the offers that belong to its project.
+      responses:
+        200:
+          description: >-
+            Successful operation will display the details of requested offer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/provider_offer'
+        '400':
+          description: Invalid <offer_id>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 'Error'
+                message: 'Invalid offer id'
+        '403':
+          description: >-
+            You do not have sufficient privileges to execute this operation.
+            Non-admin or non-owner user is not allowed to see the offer info.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 'Error'
+                message: >-
+                  You do not sufficient priviledges to perform this action
+        '404':
+          description: <offer_id> does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 'Error'
+                message: 'offer id does not exist'
+    put:
+      tags:
+        - offer
+      operationId: update_offer(offer_id, parameter_key = new value)
+      description: >-
+        Changes the status field of the offer.
+          - queued -- when a provider service gets new offer
+          - available -- when provider service submits the offer to the marketplace
+          - matched -- when offer is matched to a suitable bid
+          - used -- when the contract is in progress
+          - cancelled -- When the owner or the provider service cancels the offer
+          - expired -- When the time duration of the offer has passed.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                    - available
+                    - matched
+                    - used
+                    - cancelled
+                    - expired
+                  example: matched
+        description: offer status to be updated to 'matched'
+        required: true
+
+      responses:
+        '200':
+          description: Successfully updates the status attribute of offer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/provider_offer_put'
+        '400':
+          description: Invalid <offer_id>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 'Error'
+                message: 'Invalid offer id'
+        '403':
+          description: >-
+            You do not have sufficient privileges to execute this operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 'Error'
+                message: >-
+                  You do not sufficient priviledges to perform this action
+        '404':
+          description: <offer_id> does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 'Error'
+                message: 'offer id does not exist'
+    delete:
+      tags:
+        - offer
+      operationId: update_offer(offer_id, status = cancelled)
+      description: >-
+        Updates the status of the offer to be 'cancelled'
+      responses:
+        '200':
+          description: Successfully updates the status attribute of offer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/provider_offer_delete'
+        '400':
+          description: Invalid <offer_id>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 'Error'
+                message: 'Invalid offer id'
+        '403':
+          description: >-
+            You do not have sufficient privileges to execute this operation.
+            Non-admin or non-owner user is not allowed to delete the offer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 'Error'
+                message: >-
+                  You do not sufficient priviledges to perform this action
+        '404':
+          description: <offer_id> does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 'Error'
+                message: 'offer id does not exist'
+
+
+components:
+  schemas:
+    Server_config:
+      properties:
+        properties:
+          type: object
+          description: >-
+            Free form meta-data that describes the server.This is just a
+            sample.
+          additionalProperties: true
+          example:
+            memory_gb: 10240
+            cpu_arch: x86_64
+            cpu_physical_count: 4
+            cpu_core_count: 16
+            cpu_ghz: 3.0
+            disks:
+              - size_gb: 500
+                model: 'YOYODYNE 1234'
+              - size_gb: 1024
+                model: 'evo840 ssd'
+
+    provider_offer:
+      type: object
+      properties:
+        provider_offer_id:
+          description: >-
+            offer_id added by the provider before it submits the offer to marketplace. To avoid offer duplication (idempotent additions)
+          type: string
+          format: UUID
+          example: '90894712-3b21-4bf7-9899-b4234530ff8b'
+        provider_id:
+          description: >-
+            Identification for marketplace to correctly identify the offer making provider service.
+          type: string
+          format: UUID
+          example: '90894712-3b21-4bf7-9899-b4219730ff8b'
+        project_id:
+          description: >-
+            Identification for provider service to identify the project that creator of the offer.
+          type: string
+          format: UUID
+          example: '12a59a51-b4d6-497d-9f75-f56c409305c8'
+        server_id:
+          type: string
+          format: UUID
+          example: 'fb878e3e-9425-4285-babf-0e58a7b091b2'
+          description: unique ID of the physical server per Ironic deployment
+        start_time:
+          description: >-
+            ISO-8601 DateTime format with timezone difference from UTC  eg
+            '(Date-16 July 2016, Time 8-30 pm Boston time)'
+          type: string
+          format: (yyyy-mm-ddThh:mm:ss-/+hh)
+          example: (2016-07-16T19:20:30-04:00)
+        end_time:
+          description: >-
+            ISO-8601 DateTime format with timezone difference from UTC  eg
+            '(Date-16 August 2016, Time 8-30 pm Boston time)'
+          type: string
+          format: (yyyy-mm-ddThh:mm:ss-/+hh)
+          example: (2016-08-16T19:20:30-04:00)
+        server_config: #As provided by Ironic to the Provider service.
+          $ref: '#/components/schemas/Server_config'
+        status:
+          type: string
+          enum:
+            - queued
+            - available # Means submitted to the marketplace
+            - matched
+            - used
+            - cancelled
+            - expired
+          default: queued
+        cost:
+          type: number
+          format: float64
+          example: 11
+          description: >-
+            States floor price, the minimum asking price. Rate is charged per
+            hour.
+
+    provider_offer_put:
+      type: object
+      properties:
+        provider_offer_id:
+          description: >-
+            offer_id added by the provider before it submits the offer to marketplace. To avoid offer duplication (idempotent additions)
+          type: string
+          format: UUID
+          example: '90894712-3b21-4bf7-9899-b4234530ff8b'
+        provider_id:
+          description: >-
+            Identification for marketplace to correctly identify the offer making provider service.
+          type: string
+          format: UUID
+          example: '90894712-3b21-4bf7-9899-b4219730ff8b'
+        project_id:
+          description: >-
+            Identification for provider service to identify the project that creator of the offer.
+          type: string
+          format: UUID
+          example: '12a59a51-b4d6-497d-9f75-f56c409305c8'
+        server_id:
+          type: string
+          format: UUID
+          example: 'fb878e3e-9425-4285-babf-0e58a7b091b2'
+          description: unique ID of the physical server per Ironic deployment
+        start_time:
+          description: >-
+            ISO-8601 DateTime format with timezone difference from UTC  eg
+            '(Date-16 July 2016, Time 8-30 pm Boston time)'
+          type: string
+          format: (yyyy-mm-ddThh:mm:ss-/+hh)
+          example: (2016-07-16T19:20:30-04:00)
+        end_time:
+          description: >-
+            ISO-8601 DateTime format with timezone difference from UTC  eg
+            '(Date-16 August 2016, Time 8-30 pm Boston time)'
+          type: string
+          format: (yyyy-mm-ddThh:mm:ss-/+hh)
+          example: (2016-08-16T19:20:30-04:00)
+        server_config: #As provided by Ironic to the Provider service.
+          $ref: '#/components/schemas/Server_config'
+        status:
+          type: string
+          enum:
+            - queued
+            - available # Means submitted to the marketplace
+            - matched
+            - used
+            - cancelled
+            - expired
+          default: matched
+        cost:
+          type: number
+          format: float64
+          example: 11
+          description: >-
+            States floor price, the minimum asking price. Rate is charged per
+            hour.
+
+    provider_offer_delete:
+      type: object
+      properties:
+        provider_offer_id:
+          description: >-
+            offer_id added by the provider before it submits the offer to marketplace. To avoid offer duplication (idempotent additions)
+          type: string
+          format: UUID
+          example: '90894712-3b21-4bf7-9899-b4234530ff8b'
+        provider_id:
+          description: >-
+            Identification for marketplace to correctly identify the offer making provider service.
+          type: string
+          format: UUID
+          example: '90894712-3b21-4bf7-9899-b4219730ff8b'
+        project_id:
+          description: >-
+            Identification for provider service to identify the project that creator of the offer.
+          type: string
+          format: UUID
+          example: '12a59a51-b4d6-497d-9f75-f56c409305c8'
+        server_id:
+          type: string
+          format: UUID
+          example: 'fb878e3e-9425-4285-babf-0e58a7b091b2'
+          description: unique ID of the physical server per Ironic deployment
+        start_time:
+          description: >-
+            ISO-8601 DateTime format with timezone difference from UTC  eg
+            '(Date-16 July 2016, Time 8-30 pm Boston time)'
+          type: string
+          format: (yyyy-mm-ddThh:mm:ss-/+hh)
+          example: (2016-07-16T19:20:30-04:00)
+        end_time:
+          description: >-
+            ISO-8601 DateTime format with timezone difference from UTC  eg
+            '(Date-16 August 2016, Time 8-30 pm Boston time)'
+          type: string
+          format: (yyyy-mm-ddThh:mm:ss-/+hh)
+          example: (2016-08-16T19:20:30-04:00)
+        server_config: #As provided by Ironic to the Provider service.
+          $ref: '#/components/schemas/Server_config'
+        status:
+          type: string
+          enum:
+            - queued
+            - available # Means submitted to the marketplace
+            - matched
+            - used
+            - cancelled
+            - expired
+          default: cancelled
+        cost:
+          type: number
+          format: float64
+          example: 11
+          description: >-
+            States floor price, the minimum asking price. Rate is charged per
+            hour.
+
+    project_offer:
+      type: object
+      properties:
+        projectr_offer_id:
+          description: >-
+            offer_id added by the project before it submits the offer to provider service. To avoid offer duplication (idempotent additions)
+          type: string
+          format: UUID
+          example: '90894712-3b21-4bf7-9899-b4234530ff8b'
+        project_id: # Project that owns the given server.
+          type: string
+          format: UUID
+          example: '12a59a51-b4d6-497d-9f75-f56c409305c8'
+          description: username that created the offer
+        server_id: # Unique machine identifier per Ironic deployment
+          type: string
+          format: UUID
+          example: 'fb878e3e-9425-4285-babf-0e58a7b091b2'
+          description: unique ID of the physical server
+        start_time:
+          description: >-
+            ISO-8601 DateTime format with timezone difference from UTC  eg
+            '(Date-16 July 2016, Time 8-30 pm Boston time)'
+          type: string
+          format: (yyyy-mm-ddThh:mm:ss-/+hh)
+          example: (2016-07-16T19:20:30-04:00)
+        end_time:
+          description: >-
+            ISO-8601 DateTime format with timezone difference from UTC  eg
+            '(Date-16 August 2016, Time 8-30 pm Boston time)'
+          type: string
+          format: (yyyy-mm-ddThh:mm:ss-/+hh)
+          example: (2016-08-16T19:20:30-04:00)
+        cost:
+          type: number
+          format: float64
+          example: 11
+          description: >-
+            States floor price, the minimum asking price. Rate is charged per
+            hour.
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "Error"
+        message:
+          type: string
+          example: "Invalid input parameters"
+
+
