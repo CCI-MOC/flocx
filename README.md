@@ -3,6 +3,8 @@
 ![Python](./images/python_v3.0_blue.svg)
 ![License](./images/License-Apache2.0-blue.svg)
 
+#Onur has joined the team
+
 # First Layer of Open Cloud eXchange
 
 FLOCX provides a marketplace for trading physical servers among co-located
