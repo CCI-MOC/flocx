@@ -1,0 +1,21 @@
+# First Layer of the Open Cloud Exchange (FLOCX)
+
+FLOCX provides a marketplace for trading physical servers among co-located
+pools of hardware where each pool is owned and managed by independent
+organizations.  Using FLOCX, organizations can rent nodes from their co-located
+neighbors in times of high demand and offer their own resources at a suitable
+price when others experience high demand. 
+
+## Project architecture
+
+- [FLOCX Architecture](architecture.md)
+
+## Project metadocumentation
+
+- [Commit message best practices](commit-messages.md)
+- [Definition of Done](definition-of-done.md)
+
+## API Specifications
+
+- [Marketplace API](specs/api_marketplace.html)
+- [Match syntax](match-syntax.html)

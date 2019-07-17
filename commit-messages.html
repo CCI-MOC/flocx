@@ -1,0 +1,263 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>FLOCX Commit Message Best Practices &mdash; FLOCX  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> FLOCX
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">FLOCX Commit Message Best Practices</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">FLOCX</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>FLOCX Commit Message Best Practices</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/commit-messages.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="flocx-commit-message-best-practices">
+<h1>FLOCX Commit Message Best Practices<a class="headerlink" href="#flocx-commit-message-best-practices" title="Permalink to this headline">¶</a></h1>
+<p>Commits to FLOCX projects should follow these best practices:</p>
+<ol>
+<li><p><strong><a name="separate"></a>A commit messages should have a subject line and
+body separated by a blank line.</strong></p>
+<p>The first line of your commit message is displayed by itself in various
+circumstances (e.g., <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--oneline</span></code>, variously on GitHub, and so
+forth. The subject should provide a succinct summary of the commit in order
+to make these displays useful.</p>
+</li>
+<li><p><strong><a name="subject50"></a>The subject message should be limited to 60
+characters or less.</strong></p>
+<p>The subject line should be kept short, since it is often displayed on
+screen after a commit id.</p>
+</li>
+<li><p><strong><a name="subcaps"></a>The subject line should start with a capital
+letter.</strong></p>
+<p>Readers generally expect the first word in a sentence to be capitalized.</p>
+</li>
+<li><p><strong><a name="subperiod"></a>The subject line should not end with a period.</strong></p>
+<p>This is a common convention for summary descriptions in many situations.</p>
+</li>
+<li><p><strong><a name="mood"></a>The subject line should be written in the imperative
+mood.</strong></p>
+<ul>
+<li><p>Instead of: <code class="docutils literal notranslate"><span class="pre">This</span> <span class="pre">commit</span> <span class="pre">adds</span> <span class="pre">tests</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">api</span> <span class="pre">class</span></code></p>
+<p>Use: <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">tests</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">api</span> <span class="pre">class</span></code></p>
+</li>
+<li><p>Instead of: <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">widget</span> <span class="pre">feature</span></code></p>
+<p>Use: <code class="docutils literal notranslate"><span class="pre">Implement</span> <span class="pre">new</span> <span class="pre">widget</span> <span class="pre">feature</span></code></p>
+</li>
+</ul>
+</li>
+<li><p><strong><a name="body72"></a>Lines in the body should be wrapped at 72
+characters.</strong></p>
+<p>Many terminals default to 80 characters in width. Keeping lines wrapped at
+72 characters leaves room for git to indent messages without overflowing
+the width of the terminal.</p>
+</li>
+<li><p><strong><a name="explain"></a>The commit message should explain the purpose of the
+commit.</strong></p>
+<p>We want the git log to be a useful source of information about the project.
+Your commit message should explain <em>why</em> you made the changes and should
+summarize the nature of the changes. For example, this isn’t a great commit
+message:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">New</span> <span class="n">configuration</span> <span class="n">code</span>
+</pre></div>
+</div>
+<p>This is a better one:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Add</span> <span class="n">standard</span> <span class="n">configuration</span> <span class="n">handling</span> <span class="n">code</span> <span class="p">(</span><span class="n">TG</span><span class="o">-</span><span class="mi">1234</span><span class="p">)</span>
+
+<span class="n">In</span> <span class="n">order</span> <span class="n">to</span> <span class="n">operate</span> <span class="n">properly</span><span class="p">,</span> <span class="n">our</span> <span class="n">service</span> <span class="n">requires</span> <span class="n">a</span> <span class="n">number</span> <span class="n">of</span>
+<span class="n">configuration</span> <span class="n">values</span> <span class="n">to</span> <span class="n">be</span> <span class="n">provided</span> <span class="n">by</span> <span class="n">the</span> <span class="n">operator</span><span class="o">.</span> <span class="n">This</span> <span class="n">commit</span> <span class="n">introduces</span>
+<span class="n">a</span> <span class="n">standard</span> <span class="n">mechanism</span> <span class="k">for</span> <span class="n">handling</span> <span class="n">configuration</span> <span class="n">options</span> <span class="p">(</span><span class="n">oslo_config</span><span class="p">)</span> <span class="ow">and</span>
+<span class="n">defines</span> <span class="n">a</span> <span class="n">number</span> <span class="n">of</span> <span class="n">configuration</span> <span class="n">options</span><span class="o">.</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong><a name="bugref"></a>The commit message should reference the
+bug/issue/task/user story to which it applies.</strong></p>
+<p>Referencing the related bug/issue/etc in your commit message provides
+information about <em>why</em> the changes were made. In many situations, the
+reference can be used to automatically update the referenced issue with
+information about the commit or even apply status changes.</p>
+<p>For <a class="reference external" href="https://github.com/">GitHub</a> issues, use the format <code class="docutils literal notranslate"><span class="pre">#nnn</span></code>, where <code class="docutils literal notranslate"><span class="pre">nnn</span></code> is the GitHub
+issue number. For more information, see <a class="reference external" href="https://help.github.com/en/articles/closing-issues-using-keywords">Closing issues using keywords</a>.</p>
+<p>For <a class="reference external" href="https://taiga.io/">Taiga</a> tasks/user stories, use the format <code class="docutils literal notranslate"><span class="pre">TG-nnn</span></code>, where <code class="docutils literal notranslate"><span class="pre">nnn</span></code> is
+the task or user story number. For more information, see <a class="reference external" href="https://tree.taiga.io/support/integrations/attach-commits-to-elements-via-commit-message/">Attach commits to
+elements via commit message</a> and <a class="reference external" href="https://tree.taiga.io/support/integrations/changing-elements-status-via-commit-message/">Changing elements status via commit
+message</a>.</p>
+</li>
+</ol>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, FLOCX Team
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

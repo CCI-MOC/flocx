@@ -1,0 +1,310 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>FLOCX Architecture &mdash; FLOCX  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> FLOCX
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">FLOCX Architecture</a><ul>
+<li><a class="reference internal" href="#micro-services-that-make-up-flocx">Micro-services that make up FLOCX</a></li>
+<li><a class="reference internal" href="#changes-to-existing-openstack-service">Changes to Existing OpenStack Service</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#minimum-viable-product-mvp">Minimum Viable Product (MVP)</a><ul>
+<li><a class="reference internal" href="#assumptions-made-for-mvp">Assumptions made for MVP</a></li>
+<li><a class="reference internal" href="#overview-of-the-workflow-of-flocx-mvp">Overview of the workflow of FLOCX MVP</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#glossary">GLOSSARY</a><ul>
+<li><a class="reference internal" href="#offers">Offers</a></li>
+<li><a class="reference internal" href="#bids">Bids</a></li>
+<li><a class="reference internal" href="#contracts">Contracts</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">FLOCX</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>FLOCX Architecture</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/architecture.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="flocx-architecture">
+<h1>FLOCX Architecture<a class="headerlink" href="#flocx-architecture" title="Permalink to this headline">¶</a></h1>
+<p><img alt="_static/Ironic,%20Provider,%20Marketplace.png" src="_static/Ironic,%20Provider,%20Marketplace.png" />Flocx architecture diagram</p>
+<p>To enable such a marketplace we will have to create some new services and make
+changes to existing OpenStack services.</p>
+<div class="section" id="micro-services-that-make-up-flocx">
+<h2>Micro-services that make up FLOCX<a class="headerlink" href="#micro-services-that-make-up-flocx" title="Permalink to this headline">¶</a></h2>
+<p>FLOCX consists of the following new micro-services that will be added to
+OpenStack:</p>
+<p><strong><a class="reference external" href="https://github.com/CCI-MOC/esi-leap">Provider Service</a></strong>: A new
+micro-service that offers a platform per OpenStack deployment to manage the
+requests for offering servers in the marketplace on behalf of its users.
+Owners of decide which servers to offer in the marketplace by submitting their
+offers to the provider service.  Provider service then publishes these offers
+to the marketplace on their behalf.</p>
+<p><strong><a class="reference external" href="https://github.com/CCI-MOC/flocx-market">Marketplace Service</a></strong>: A new
+micro-service that gathers offers, bids and provides contracts when suitable
+matches are found between offers and bids.</p>
+<p><strong><a class="reference external" href="https://github.com/CCI-MOC/flocx-matcher">Auction Engine</a></strong>: The matchmaking
+service that maps offers to suitable bids and vice-versa.</p>
+</div>
+<div class="section" id="changes-to-existing-openstack-service">
+<h2>Changes to Existing OpenStack Service<a class="headerlink" href="#changes-to-existing-openstack-service" title="Permalink to this headline">¶</a></h2>
+<p><strong>Ironic</strong>: Current release of Ironic (as of summer of 2019) does not support
+multi-tenancy.  We will make necessary changes to Ironic so that it can support
+multi-tenancy.</p>
+<p>A multi-tenant Ironic offer following advantages:</p>
+<ul class="simple">
+<li><p>This allows for logically isolating hardware that belongs to different
+groups.</p></li>
+<li><p>Organizations to put their hardware under the control of a single Ironic
+deployment while maintaining ownership and control of their servers.</p></li>
+<li><p>Small hardware owners (single machine owners) do have to setup a whole
+OpenStack to participate in FLOCX.  They can simply join ironic of any
+existing OpenStack deployments and get started.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="minimum-viable-product-mvp">
+<h1>Minimum Viable Product (MVP)<a class="headerlink" href="#minimum-viable-product-mvp" title="Permalink to this headline">¶</a></h1>
+<p>We use agile methodology to develop this system. To begin, we would like to
+keep things simple.  Following are the simplifications that we have assumed in
+our minimum viable product.</p>
+<div class="section" id="assumptions-made-for-mvp">
+<h2>Assumptions made for MVP<a class="headerlink" href="#assumptions-made-for-mvp" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>There is only one OpenStack deployment managing all hardware from all
+organizations.</p></li>
+<li><p>FLOCX-microservices (<code class="docutils literal notranslate"><span class="pre">provider</span> <span class="pre">service</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">marketplace</span> <span class="pre">service</span></code>) will be
+services added to the single OpenStack deployment.</p></li>
+<li><p>All servers are of homogeneous configuration.</p></li>
+<li><p>All hardware is managed by Ironic where each organization is assigned a
+project.</p></li>
+</ul>
+</div>
+<div class="section" id="overview-of-the-workflow-of-flocx-mvp">
+<h2>Overview of the workflow of FLOCX MVP<a class="headerlink" href="#overview-of-the-workflow-of-flocx-mvp" title="Permalink to this headline">¶</a></h2>
+<p><img alt="_static/FLOCX_workflow_overiew.png" src="_static/FLOCX_workflow_overiew.png" />FLOCX workflow</p>
+<p>Please refer to the figure for each steps described below:</p>
+<ol class="simple">
+<li><p>Internally an organization can distribute its hardware by creating new
+projects.</p></li>
+<li><p>Internal projects can add servers that their organization owns which they
+release back when they are done using it.</p></li>
+<li><p>When an organization wishes to make their servers available for rent by
+another organization, they will submit <a class="reference external" href="#offers">offers</a> to the
+<code class="docutils literal notranslate"><span class="pre">provider-service</span></code></p></li>
+<li><p>Provider service, after doing necessary authentication and appending the
+hardware configuration information to the offer, will publish the offers in
+the marketplace.  Other organizations that need extra hardware may submit
+<a class="reference external" href="#bids">bids</a> that describe the hardware configuration they require and the
+price they are willing to pay.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Marketplace</span> <span class="pre">API</span> <span class="pre">engine</span></code> stores pushes all these offers and bids on a
+continuous basis to the <code class="docutils literal notranslate"><span class="pre">Auction</span> <span class="pre">Engine</span></code> and also store them into its
+database.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Auction</span> <span class="pre">Engine</span></code> finds suitable matches of offers with bids and creates
+<a class="reference external" href="#contracts">contracts</a> for all of the suitable matches.  These are stored
+in the marketplace database.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Marketplace</span> <span class="pre">API</span> <span class="pre">engine</span></code> fetches the information regarding new contracts.</p></li>
+<li><p>Both the offering and the bidding organizations are notified about the newly
+formed contract.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="glossary">
+<h1>GLOSSARY<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="offers">
+<h2>Offers<a class="headerlink" href="#offers" title="Permalink to this headline">¶</a></h2>
+<p>Contains data about the server available for rent. Includes information like
+hardware configuration, Beginning and Ending time of availability and price at
+which the server is available for rent.</p>
+</div>
+<div class="section" id="bids">
+<h2>Bids<a class="headerlink" href="#bids" title="Permalink to this headline">¶</a></h2>
+<p>Contains data about the type of machine the bidders wishes to rent. It includes
+information like <code class="docutils literal notranslate"><span class="pre">start_time</span></code> - when the server is needed, <code class="docutils literal notranslate"><span class="pre">Duration</span></code>: how long
+will it be used, <code class="docutils literal notranslate"><span class="pre">price</span></code>: what is the price the bidder is willing to pay. It
+also includes desired hardware configuration if any.</p>
+</div>
+<div class="section" id="contracts">
+<h2>Contracts<a class="headerlink" href="#contracts" title="Permalink to this headline">¶</a></h2>
+<p>Contains data about which offers have matched with particular bid. It also
+states the duration for which the servers will be available on rent and rate at
+which the rent will be charged.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, FLOCX Team
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
