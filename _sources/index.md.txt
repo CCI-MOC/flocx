@@ -6,14 +6,10 @@ organizations.  Using FLOCX, organizations can rent nodes from their co-located
 neighbors in times of high demand and offer their own resources at a suitable
 price when others experience high demand. 
 
-## Project architecture
+## Project documentation 
 
 - [FLOCX Architecture](architecture.md)
-
-## Project metadocumentation
-
-- [Commit message best practices](commit-messages.md)
-- [Definition of Done](definition-of-done.md)
+- [How to contribute](contribute.md)
 
 ## API Specifications
 
