@@ -13,5 +13,5 @@ price when others experience high demand.
 
 ## API Specifications
 
-- [Marketplace API](specs/api_marketplace.html)
+- [Marketplace API](specs/marketplace-api.html)
 - [Match syntax](match-syntax.md)
