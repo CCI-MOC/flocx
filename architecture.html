@@ -32,7 +32,7 @@
             
   <div class="section" id="flocx-architecture">
 <h1>FLOCX Architecture<a class="headerlink" href="#flocx-architecture" title="Permalink to this headline">¶</a></h1>
-<p><img alt="_static/Ironic,%20Provider,%20Marketplace.png" src="_static/Ironic,%20Provider,%20Marketplace.png" />Flocx architecture diagram</p>
+<p><img alt="_static/Ironic-Provider-Marketplace.png" src="_static/Ironic-Provider-Marketplace.png" />Flocx architecture diagram</p>
 <p>To enable such a marketplace we will have to create some new services and make
 changes to existing OpenStack services.</p>
 <div class="section" id="micro-services-that-make-up-flocx">
@@ -67,14 +67,13 @@ OpenStack to participate in FLOCX.  They can simply join ironic of any
 existing OpenStack deployments and get started.</p></li>
 </ul>
 </div>
-</div>
 <div class="section" id="minimum-viable-product-mvp">
-<h1>Minimum Viable Product (MVP)<a class="headerlink" href="#minimum-viable-product-mvp" title="Permalink to this headline">¶</a></h1>
+<h2>Minimum Viable Product (MVP)<a class="headerlink" href="#minimum-viable-product-mvp" title="Permalink to this headline">¶</a></h2>
 <p>We use agile methodology to develop this system. To begin, we would like to
 keep things simple.  Following are the simplifications that we have assumed in
 our minimum viable product.</p>
 <div class="section" id="assumptions-made-for-mvp">
-<h2>Assumptions made for MVP<a class="headerlink" href="#assumptions-made-for-mvp" title="Permalink to this headline">¶</a></h2>
+<h3>Assumptions made for MVP<a class="headerlink" href="#assumptions-made-for-mvp" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>There is only one OpenStack deployment managing all hardware from all
 organizations.</p></li>
@@ -86,7 +85,7 @@ project.</p></li>
 </ul>
 </div>
 <div class="section" id="overview-of-the-workflow-of-flocx-mvp">
-<h2>Overview of the workflow of FLOCX MVP<a class="headerlink" href="#overview-of-the-workflow-of-flocx-mvp" title="Permalink to this headline">¶</a></h2>
+<h3>Overview of the workflow of FLOCX MVP<a class="headerlink" href="#overview-of-the-workflow-of-flocx-mvp" title="Permalink to this headline">¶</a></h3>
 <p><img alt="_static/FLOCX_workflow_overiew.png" src="_static/FLOCX_workflow_overiew.png" />FLOCX workflow</p>
 <p>Please refer to the figure for each steps described below:</p>
 <ol class="simple">
@@ -115,25 +114,26 @@ formed contract.</p></li>
 </div>
 </div>
 <div class="section" id="glossary">
-<h1>GLOSSARY<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h1>
+<h2>GLOSSARY<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="offers">
-<h2>Offers<a class="headerlink" href="#offers" title="Permalink to this headline">¶</a></h2>
+<h3>Offers<a class="headerlink" href="#offers" title="Permalink to this headline">¶</a></h3>
 <p>Contains data about the server available for rent. Includes information like
 hardware configuration, Beginning and Ending time of availability and price at
 which the server is available for rent.</p>
 </div>
 <div class="section" id="bids">
-<h2>Bids<a class="headerlink" href="#bids" title="Permalink to this headline">¶</a></h2>
+<h3>Bids<a class="headerlink" href="#bids" title="Permalink to this headline">¶</a></h3>
 <p>Contains data about the type of machine the bidders wishes to rent. It includes
 information like <code class="docutils literal notranslate"><span class="pre">start_time</span></code> - when the server is needed, <code class="docutils literal notranslate"><span class="pre">Duration</span></code>: how long
 will it be used, <code class="docutils literal notranslate"><span class="pre">price</span></code>: what is the price the bidder is willing to pay. It
 also includes desired hardware configuration if any.</p>
 </div>
 <div class="section" id="contracts">
-<h2>Contracts<a class="headerlink" href="#contracts" title="Permalink to this headline">¶</a></h2>
+<h3>Contracts<a class="headerlink" href="#contracts" title="Permalink to this headline">¶</a></h3>
 <p>Contains data about which offers have matched with particular bid. It also
 states the duration for which the servers will be available on rent and rate at
 which the rent will be charged.</p>
+</div>
 </div>
 </div>
 
@@ -164,8 +164,6 @@ which the rent will be charged.</p>
 <li><a class="reference internal" href="#">FLOCX Architecture</a><ul>
 <li><a class="reference internal" href="#micro-services-that-make-up-flocx">Micro-services that make up FLOCX</a></li>
 <li><a class="reference internal" href="#changes-to-existing-openstack-service">Changes to Existing OpenStack Service</a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#minimum-viable-product-mvp">Minimum Viable Product (MVP)</a><ul>
 <li><a class="reference internal" href="#assumptions-made-for-mvp">Assumptions made for MVP</a></li>
 <li><a class="reference internal" href="#overview-of-the-workflow-of-flocx-mvp">Overview of the workflow of FLOCX MVP</a></li>
@@ -175,6 +173,8 @@ which the rent will be charged.</p>
 <li><a class="reference internal" href="#offers">Offers</a></li>
 <li><a class="reference internal" href="#bids">Bids</a></li>
 <li><a class="reference internal" href="#contracts">Contracts</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

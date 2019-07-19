@@ -32,23 +32,28 @@
             
   <div class="section" id="flocx-matching-syntax">
 <h1>FLOCX matching syntax<a class="headerlink" href="#flocx-matching-syntax" title="Permalink to this headline">¶</a></h1>
-<p>A Bid submitted to the FLOCX Marketplace service may specify a set of criteria that must be satisfied in order to match with an available Offer. This document describes the syntax used to specify these matching rules in the REST API.</p>
+<p>A Bid submitted to the FLOCX Marketplace service may specify a set of criteria
+that must be satisfied in order to match with an available Offer. This document
+describes the syntax used to specify these matching rules in the REST API.</p>
 <div class="section" id="basic-syntax">
 <h2>Basic syntax<a class="headerlink" href="#basic-syntax" title="Permalink to this headline">¶</a></h2>
 <p>A match expression consists of a list of 3-tuples <code class="docutils literal notranslate"><span class="pre">[expression,</span> <span class="pre">operator,</span> <span class="pre">value]</span></code>, where:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">expression</span></code> is a <a class="reference external" href="http://jmespath.org/specification.html">JMESPath</a> expression used to extract a value from the node metadata,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expression</span></code> is a <a class="reference external" href="http://jmespath.org/specification.html">JMESPath</a> expression used to extract a value from the
+node metadata,</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">operator</span></code> is one of the operators described in this document, and</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">value</span></code> is the value against which the expression is compared.</p></li>
 </ul>
-<p>When there are multiple 3-tuples in a match expression, they are combined using a logical <code class="docutils literal notranslate"><span class="pre">AND</span></code> operation (i.e., they all must match).</p>
+<p>When there are multiple 3-tuples in a match expression, they are combined using
+a logical <code class="docutils literal notranslate"><span class="pre">AND</span></code> operation (i.e., they all must match).</p>
 </div>
 <div class="section" id="operators">
 <h2>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h2>
 <p>Prefix an operator with <code class="docutils literal notranslate"><span class="pre">!</span></code> to negate the comparison.</p>
 <div class="section" id="null-operator">
 <h3>Null operator<a class="headerlink" href="#null-operator" title="Permalink to this headline">¶</a></h3>
-<p>If <code class="docutils literal notranslate"><span class="pre">operator</span></code> is <code class="docutils literal notranslate"><span class="pre">null</span></code>, the value of <code class="docutils literal notranslate"><span class="pre">expression</span></code> is interpreted in a boolean context (and <code class="docutils literal notranslate"><span class="pre">value</span></code> is ignored).</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">operator</span></code> is <code class="docutils literal notranslate"><span class="pre">null</span></code>, the value of <code class="docutils literal notranslate"><span class="pre">expression</span></code> is interpreted in a boolean
+context (and <code class="docutils literal notranslate"><span class="pre">value</span></code> is ignored).</p>
 </div>
 <div class="section" id="numeric-operators">
 <h3>Numeric operators<a class="headerlink" href="#numeric-operators" title="Permalink to this headline">¶</a></h3>
@@ -82,50 +87,50 @@
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p>Match a specific host architecture:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
   <span class="p">[</span><span class="s2">&quot;cpu_arch&quot;</span><span class="p">,</span> <span class="s2">&quot;eq&quot;</span><span class="p">,</span> <span class="s2">&quot;x86_64&quot;</span><span class="p">]</span>
 <span class="p">]</span>
 </pre></div>
 </div>
 <p>Match a host with at least 48GB memory:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
   <span class="p">[</span><span class="s2">&quot;memory_mb&quot;</span><span class="p">,</span> <span class="s2">&quot;&gt;=&quot;</span><span class="p">,</span> <span class="mi">48000</span><span class="p">]</span>
 <span class="p">]</span>
 </pre></div>
 </div>
 <p>Match a host with at least 16 x86_64 CPUs:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
   <span class="p">[</span><span class="s2">&quot;cpu_arch&quot;</span><span class="p">,</span> <span class="s2">&quot;eq&quot;</span><span class="p">,</span> <span class="s2">&quot;x86_64&quot;</span><span class="p">],</span>
   <span class="p">[</span><span class="s2">&quot;inventory.cpu.count&quot;</span><span class="p">,</span> <span class="s2">&quot;&gt;=&quot;</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span>
 <span class="p">]</span>
 </pre></div>
 </div>
 <p>Match a host that supports hardware-accelerated virtualization:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
   <span class="p">[</span> <span class="s2">&quot;inventory.cpu.flags&quot;</span><span class="p">,</span> <span class="s2">&quot;contains&quot;</span><span class="p">,</span> <span class="s2">&quot;vmx&quot;</span><span class="p">]</span>
 <span class="p">]</span>
 </pre></div>
 </div>
 <p>Match a host that <strong>does not</strong> support hardware-accelerated virtualization:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
   <span class="p">[</span> <span class="s2">&quot;inventory.cpu.flags&quot;</span><span class="p">,</span> <span class="s2">&quot;!contains&quot;</span><span class="p">,</span> <span class="s2">&quot;vmx&quot;</span><span class="p">]</span>
 <span class="p">]</span>
 </pre></div>
 </div>
 <p>Match a host with a least two rotational hard disks:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-  <span class="p">[</span><span class="s2">&quot;length(inventory.disks[?</span><span class="se">\&quot;</span><span class="s2">rotational</span><span class="se">\&quot;</span><span class="s2"> == `true`])&quot;</span><span class="p">,</span> <span class="s2">&quot;&gt;=&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+  <span class="p">[</span><span class="s2">&quot;length(inventory.disks[?\&quot;rotational\&quot; == `true`])&quot;</span><span class="p">,</span> <span class="s2">&quot;&gt;=&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 <span class="p">]</span>
 </pre></div>
 </div>
 <p>Match a host with 1 or more rotational hard disks:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-  <span class="p">[</span><span class="s2">&quot;inventory.disks[?</span><span class="se">\&quot;</span><span class="s2">rotational</span><span class="se">\&quot;</span><span class="s2">==`true`]&quot;</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="n">null</span><span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+  <span class="p">[</span><span class="s2">&quot;inventory.disks[?\&quot;rotational\&quot;==`true`]&quot;</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">]</span>
 <span class="p">]</span>
 </pre></div>
 </div>
 <p>Match a specific manufacturer and product:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
   <span class="p">[</span><span class="s2">&quot;inventory.system_vendor.manufacturer&quot;</span><span class="p">,</span> <span class="s2">&quot;matches&quot;</span><span class="p">,</span> <span class="s2">&quot;Dell&quot;</span><span class="p">],</span>
   <span class="p">[</span><span class="s2">&quot;inventory.system_vendor.product_name&quot;</span><span class="p">,</span> <span class="s2">&quot;matches&quot;</span><span class="p">,</span> <span class="s2">&quot;PowerEdge M620&quot;</span><span class="p">]</span>
 <span class="p">]</span>
